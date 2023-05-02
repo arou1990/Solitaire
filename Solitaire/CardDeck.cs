@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Solitaire;
-
-namespace Solitaire;
-    public class CardDeck
+﻿namespace Solitaire;
+public class CardDeck
 {
     protected Stack<Card> Cards { get; set; } = new Stack<Card>();
-
     public int Count
     {
         get
@@ -35,7 +27,8 @@ namespace Solitaire;
                 {
                     Suit = suit,
                     Value = value,
-                    DisplayName = $"{value} of {suit}"
+                    DisplayName = $"{value} of {suit}",
+                    CardValue = (int)value
                 };
 
                 cards.Add(newCard);
@@ -61,17 +54,19 @@ namespace Solitaire;
         }
     }
 
-    public Card Draw()
+    public Card Draw(string location)
     {
         var card = Cards.Pop();
         card.IsVisible = true;
+        card.Location = location;
         return card;
     }
 
-    public Card DrawHidden()
+    public Card DrawHidden(string location)
     {
         var card = Cards.Pop();
         card.IsVisible = false;
+        card.Location = location;
         return card;
     }
 
@@ -80,4 +75,26 @@ namespace Solitaire;
         Console.Write("[" + Count + "]");
     }
 
+    public string GetCardNameAtPosition(int position)
+    {
+        try
+        {
+
+            List<Card> cards = Cards.ToList();
+
+            if (cards[position].IsVisible)
+            {
+                return cards[position].DisplayName;
+            }
+            else
+            {
+                return "[" + Count + "]";
+            }
+        }
+        catch (global::System.Exception)
+        {
+
+            return String.Empty;
+        }
+    }
 }
