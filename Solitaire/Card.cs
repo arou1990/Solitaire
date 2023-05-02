@@ -31,6 +31,7 @@ namespace Solitaire
                 return !IsRed;
             }
         }
+        public int CardValue { get; set; }
     }
 }
 
