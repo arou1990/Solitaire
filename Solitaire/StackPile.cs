@@ -8,23 +8,11 @@ namespace Solitaire;
 
     public class StackPile : PileBase
     {
-    public StackPile(string location) : base(location)
-    {
-    }
-
-    public bool HasNoHiddenCards()
-        {
-            return !Any() || Cards.All(x => x.IsVisible);
-        }
+    public StackPile(string location) : base(location) { }
 
     public int Count()    
         {
             return Cards.Count();
-        }
-
-    public List<Card> GetAllCards()    
-        {
-            return Cards;
         }
 }
     
